@@ -9,7 +9,7 @@
 #import <Cordova/CDV.h>
 #import <PassKit/PassKit.h>
 #import <WatchConnectivity/WatchConnectivity.h>
-#import "AppDelegate.h"
+#import "AppDelegate+AppleWallet.h"
 
 typedef void (^completedPaymentProcessHandler)(PKAddPaymentPassRequest *request);
 
