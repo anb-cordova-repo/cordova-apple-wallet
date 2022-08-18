@@ -17,19 +17,51 @@
  under the License.
 */
 
-#import "AppDelegate.h"
 #import "MainViewController.h"
+#import "AppDelegate+AppleWallet.h"
+#import <objc/runtime.h>
 
-@implementation AppDelegate
+@implementation AppDelegate (AppleWallet)
 
-- (BOOL)application:(UIApplication*)application 
+
+// Borrowed from http://nshipster.com/method-swizzling/
++ (void)load {
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        Class class = [self class];
+
+        SEL originalSelector = @selector(application:didFinishLaunchingWithOptions:);
+        SEL swizzledSelector = @selector(appleWallet_application:didFinishLaunchingWithOptions:);
+
+        Method originalMethod = class_getInstanceMethod(class, originalSelector);
+        Method swizzledMethod = class_getInstanceMethod(class, swizzledSelector);
+
+        BOOL didAddMethod =
+        class_addMethod(class,
+                        originalSelector,
+                        method_getImplementation(swizzledMethod),
+                        method_getTypeEncoding(swizzledMethod));
+
+        if (didAddMethod) {
+            class_replaceMethod(class,
+                                swizzledSelector,
+                                method_getImplementation(originalMethod),
+                                method_getTypeEncoding(originalMethod));
+        } else {
+            method_exchangeImplementations(originalMethod, swizzledMethod);
+        }
+    });
+}
+
+- (BOOL)appleWallet_application:(UIApplication*)application 
     didFinishLaunchingWithOptions:(NSDictionary*)launchOptions
 {
+    BOOL handled = [self appleWallet_application:application didFinishLaunchingWithOptions:launchOptions];
     self.isPairedWatchExist = NO;
     self.viewController = [[MainViewController alloc] init];
     [self checkPairedWatches];
     
-    return [super application:application didFinishLaunchingWithOptions:launchOptions];
+    return handled;
 }
 
 -(void)checkPairedWatches 

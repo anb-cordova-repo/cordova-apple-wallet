@@ -20,8 +20,9 @@
 #import <Cordova/CDVViewController.h>
 #import <Cordova/CDVAppDelegate.h>
 #import <WatchConnectivity/WatchConnectivity.h>
+#import "AppDelegate.h"
 
-@interface AppDelegate : CDVAppDelegate <WCSessionDelegate> {}
+@interface AppDelegate (AppleWallet) <WCSessionDelegate> {}
 
 @property (strong,nonatomic) WCSession *session;
 @property (assign,nonatomic) BOOL isPairedWatchExist;
