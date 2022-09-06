@@ -74,12 +74,16 @@
 }
 
 /** Called when the session can no longer be used to modify or add any new transfers and, all interactive messages will be cancelled, but delegate callbacks for background transfers can still occur. This will happen when the selected watch is being changed.
-Fix based the iOS 16 and MABS 8.1*/
+Fix based the iOS 16 and MABS 8.1*//*
 - (void)sessionDidBecomeInactive:(WCSession *)session 
 {
     
 }
+*/
+-(void)sessionDidBecomeInactive:(nonnull WCSession *)session
+{
 
+}
 
 
 /** Called when all delegate callbacks for the previously selected watch has occurred. The session can be re-activated for the now selected watch using activateSession. */
