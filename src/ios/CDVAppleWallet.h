@@ -19,5 +19,7 @@
 - (void) checkPairedDevicesBySuffix:(CDVInvokedUrlCommand*)command;
 - (void)startAddPaymentPass:(CDVInvokedUrlCommand*)command;
 - (void)completeAddPaymentPass:(CDVInvokedUrlCommand*)command;
+/* Fix for MABS 8.1 */
+- (void)sessionDidBecomeInactive:(nonnull WCSession *)session;
 
 @end
