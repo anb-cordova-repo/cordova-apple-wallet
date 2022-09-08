@@ -13,8 +13,8 @@ function getProjectName() {
 }
 
 module.exports = function(context) {
-      var projectName = getProjectName();
-      var appDelegate = path.join(context.opts.projectRoot, "platforms", "ios", projectName, "Classes", "AppDelegate.h");   
+    var projectName = getProjectName();
+    var appDelegate = path.join(context.opts.projectRoot, "platforms", "ios", projectName, "Classes", "AppDelegate.h");   
     if (fs.existsSync(appDelegate)) {
      
       fs.readFile(appDelegate, 'utf8', function (err,data) {
