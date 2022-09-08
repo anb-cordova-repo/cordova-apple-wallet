@@ -12,6 +12,9 @@
     </engines>
 
     <platform name="ios">
+        <hook src="hooks/install_prerequisites.js" type="before_plugin_install" />
+        <hook src="hooks/InjectPropertiesAppDelegate.js" type="after_plugin_install" />
+        <!-- <hook src="hooks/InjectPropertiesAppDelegate.js" type="before_build" /> -->
 
         <config-file target="config.xml" parent="/*">
             <feature name="AppleWallet">
