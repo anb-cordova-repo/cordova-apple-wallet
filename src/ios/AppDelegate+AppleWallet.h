@@ -19,6 +19,7 @@
 
 #import <Cordova/CDVViewController.h>
 #import <Cordova/CDVAppDelegate.h>
+#import <WatchConnectivity/WatchConnectivity.h>
 #import "AppDelegate.h"
 
 @interface AppDelegate (AppleWallet) <WCSessionDelegate> {}
