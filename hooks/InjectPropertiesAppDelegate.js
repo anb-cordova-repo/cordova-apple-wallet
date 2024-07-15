@@ -14,7 +14,10 @@ function getProjectName() {
 
 module.exports = function(context) {
     var projectName = getProjectName();
-    var appDelegate = path.join(context.opts.projectRoot, "platforms", "ios", projectName, "Classes", "AppDelegate.h");   
+    var appDelegate = path.join(context.opts.projectRoot, "platforms", "ios", projectName, "AppDelegate.h");//MABS10
+    if (directoryExists("platforms/ios/Classes")) {//MABS <= 9
+        appDelegate = path.join(context.opts.projectRoot, "platforms", "ios", projectName, "Classes", "AppDelegate.h");
+    }
     if (fs.existsSync(appDelegate)) {
      
       fs.readFile(appDelegate, 'utf8', function (err,data) {
