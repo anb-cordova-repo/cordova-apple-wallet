@@ -12,6 +12,16 @@ function getProjectName() {
     return name || null;
 }
 
+
+function directoryExists(path) {
+    try {
+        return fs.statSync(path).isDirectory();
+    }
+    catch (e) {
+        return false;
+    }
+}
+
 module.exports = function(context) {
     var projectName = getProjectName();
     var appDelegate = path.join(context.opts.projectRoot, "platforms", "ios", projectName, "AppDelegate.h");//MABS10
